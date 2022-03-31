@@ -1,4 +1,5 @@
 #ifndef int_bool
+#define int_bool
 
 #define true 1
 #define false 0
