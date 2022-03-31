@@ -44,23 +44,38 @@ char *parse_filepath(int argc, char *argv[]) {
 unsigned int array_from_file(int array[],
            unsigned int max_size,
            const char *filepath) {
+    
+    unsigned int size = 0u;
+    
     // creo un archivo con nombre file
     FILE *file;
 
     // abro el archivo
     file = fopen(filepath, "r");
+    
+    // verifico que el arreglo no sea nulo
+    if (file == NULL) {
+        printf("Error opening the file");
+        exit(EXIT_FAILURE);
+    }
+    
     // escaneo el largo del arreglo
-    fscanf(file, "%u", &max_size);
+    // mala practica pisar un parametro como lo hice con max_size
+    // si max_size > MAX_SIZE ocure un problema y guardo cosas en memoria que no correspode
+    fscanf(file, "%u", &size);
+    if(size > max_size) {
+        exit(EXIT_FAILURE);
+    }
 
     // escaneo los elementos del arreglo
-    for(unsigned int i = 0; i < max_size; i++) {
+    for(unsigned int i = 0; i < size; i++) {
         fscanf(file, "%d", &array[i]);
     }
 
     // cierro el archivo
     fclose(file);
 
-    return max_size;
+    return size;
 }
 
 void array_dump(int a[], unsigned int length) {
