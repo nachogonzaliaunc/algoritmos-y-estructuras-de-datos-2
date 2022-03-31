@@ -54,7 +54,7 @@ unsigned int array_from_file(int array[],
     do {
         fprintf(stdout, "introduzca el largo del arreglo: "),
         scanf("%d", &size);
-    } while (size <= 0 && size <= max_size);
+    } while (size <= 0 && max_size <= size);
 
     // pido al usuario los elementos del arreglo
     for(int i = 0; i < size; i++) {
